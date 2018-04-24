@@ -1,5 +1,6 @@
 
-alphabet = ['a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z']
+#alphabet = ['a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z']
+alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 #Deşifreleme fonksiyonu
 def decryption(cipher,a,b):
@@ -8,7 +9,7 @@ def decryption(cipher,a,b):
     #z değeri bulunuyor
     z = 0
     for i in range(1,29):
-        if ((int(a)*int(i)) % int(29) ) == 1:
+        if ((int(a)*int(i)) % int(len(alphabet)) ) == 1:
             z = i
 
     valArray = []
@@ -22,7 +23,7 @@ def decryption(cipher,a,b):
 
     #valArray'deki değerler z(y-b) mod 29 ile işleme sokulup çözülüyor ve karakter karşılığı decryptedArray dizisine yazılıyor.
     for i in valArray:
-        y = (int(z) * (int(i)-int(b)) ) % int(29)
+        y = (int(z) * (int(i)-int(b)) ) % int(len(alphabet))
         decryptedArray.append(alphabet[y])
 
     decryptedString = ""
@@ -49,7 +50,7 @@ def encryption(plainText,a,b):
 
     #valArray deki her değer ax+b mod 29 ile işleme sokulup karakter karşılığı encryptedArray dizisine yazılıyor.
     for i in valArray:
-            y = ((int(a) * + int(i)) + int(b) ) % int(29)
+            y = ((int(a) * + int(i)) + int(b) ) % int(len(alphabet))
             encryptedArray.append(alphabet[y])
 
     encryptedString = ""
@@ -81,6 +82,8 @@ a = input("a degerini giriniz : ")                  #Anahtarın a değeri alın�
 b = input("b degerini giriniz : ")                  #Anahtarın b değeri alınıyor.
 
 message = message.lower()   #Büyük harf ile bir mesaj girilmiş ise onu küçük harfe çeviriyor.
+
+print(len(alphabet))
 
 #Girilen mesajın içinde sayı olup olmadığu kontrol ediliyor.
 for i in message:
