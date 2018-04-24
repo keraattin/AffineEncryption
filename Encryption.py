@@ -1,8 +1,9 @@
 
 alphabet = ['a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z']
 
+#Deşifreleme fonksiyonu
 def decryption(cipher,a,b):
-    ptArray = list(cipher)
+    ptArray = list(cipher)  #String'in her karakteri ayrılıp liste olusuturluyor.
 
     #z değeri bulunuyor
     z = 0
@@ -13,24 +14,27 @@ def decryption(cipher,a,b):
     valArray = []
     decryptedArray = []
 
+    #Her stringe karşılık gelen alfabedeki sayı değeri valArray'e alınıyor.
     for i in ptArray:
         for k,val in enumerate(alphabet):
             if i == val:
                 valArray.append(k)
 
+    #valArray'deki değerler z(y-b) mod 29 ile işleme sokulup çözülüyor ve karakter karşılığı decryptedArray dizisine yazılıyor.
     for i in valArray:
         y = (int(z) * (int(i)-int(b)) ) % int(29)
         decryptedArray.append(alphabet[y])
 
     decryptedString = ""
 
+    #Dizinin her elemanı birleştirilerek çözülmüş metin ortaya çıkarılıyor.
     for i in decryptedArray:
         decryptedString += i
 
     print("Anahtar degeri : (",a,",",b,")")
     print("Çözülmüş metin : ",decryptedString)
 
-
+#Şifreleme fonksiyonu
 def encryption(plainText,a,b):
     ptArray = list(plainText)   #String'in her karakteri ayrılıp liste olusuturluyor.
 
@@ -104,10 +108,11 @@ if  isPrimeBetween(int(a),len(alphabet)) == False:
     print("a ile n değeri aralarında asal olmalıdır.")
     exit(0)
 
-encryptedString = encryption(message,a,b)
+encryptedString = encryption(message,a,b)  #Şifrelenmiş mesaj elde ediliyor.
 
-counter = 0
+counter = 0 #Kaç deneme yapıldığını gösteren sayaç.
 
+#Tüm olası anahtar degerleri deneniyor.
 for a in range(1,29):
     if isPrimeBetween(int(a), len(alphabet)) == True:
         for b in range(1,29):
