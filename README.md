@@ -23,4 +23,9 @@
 - Her değer için D(x) = z(y-b) mod n işlemi uygulanır ve sonuçlar diziye alınır.
 - Her sonucun alfabedeki karşılıkları bulunarak şifreli metin çözülür.
 
+## Kullanımı 
+
+```
+  python3 Encryption.py
+```
 
