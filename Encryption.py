@@ -113,9 +113,9 @@ encryptedString = encryption(message,a,b)  #Şifrelenmiş mesaj elde ediliyor.
 counter = 0 #Kaç deneme yapıldığını gösteren sayaç.
 
 #Tüm olası anahtar degerleri deneniyor.
-for a in range(1,29):
+for a in range(1,len(alphabet)):
     if isPrimeBetween(int(a), len(alphabet)) == True:
-        for b in range(1,29):
+        for b in range(1,len(alphabet)):
                 decryption(encryptedString, a, b)
                 counter += 1
 
