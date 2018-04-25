@@ -1,6 +1,14 @@
 
-#alphabet = ['a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z']
-alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+'''alphabet = ['a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z',
+            'A','B','C','Ç','D','E','F','G','Ğ','H','I','İ','J','K','L','M','N','O','Ö','P','R','S','Ş','T','U','Ü','V','Y','Z',
+            '0','1','2','3','4','5','6','7','8','9','.',',',';','-','?','=','(',')','/','+','-','*']'''
+#alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
+alphabet = ['a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z',
+             '0','1','2','3','4','5','6','7','8','9','.',',',';','-','?','=',
+            'A','B','C','Ç','D','E','F','G','Ğ','H','I','İ','J','K','L','M','N','O','Ö','P','R','S','Ş','T','U','Ü','V','Y','Z',
+            '(',')','/','+','-','*']
+
 
 #Deşifreleme fonksiyonu
 def decryption(cipher,a,b):
@@ -8,9 +16,10 @@ def decryption(cipher,a,b):
 
     #z değeri bulunuyor
     z = 0
-    for i in range(1,29):
+    for i in range(1,len(alphabet)):
         if ((int(a)*int(i)) % int(len(alphabet)) ) == 1:
             z = i
+
 
     valArray = []
     decryptedArray = []
@@ -32,8 +41,7 @@ def decryption(cipher,a,b):
     for i in decryptedArray:
         decryptedString += i
 
-    print("Anahtar degeri : (",a,",",b,")")
-    print("Çözülmüş metin : ",decryptedString)
+    print(decryptedString,end=' ')
 
 #Şifreleme fonksiyonu
 def encryption(plainText,a,b):
@@ -59,7 +67,7 @@ def encryption(plainText,a,b):
     for i in encryptedArray:
         encryptedString += i
 
-    print("Şifrelenmiş metin : " ,encryptedString)
+    #print("Şifrelenmiş metin : " ,encryptedString)
     return encryptedString
 
 #Aralarında asal olup olmadıklarını belirleyen fonksiyon
@@ -81,16 +89,6 @@ message = input("Şifrelenecek metini giriniz : ")   #Kullanıcıdan mesaj alın
 a = input("a degerini giriniz : ")                  #Anahtarın a değeri alınıyıor.
 b = input("b degerini giriniz : ")                  #Anahtarın b değeri alınıyor.
 
-message = message.lower()   #Büyük harf ile bir mesaj girilmiş ise onu küçük harfe çeviriyor.
-
-print(len(alphabet))
-
-#Girilen mesajın içinde sayı olup olmadığu kontrol ediliyor.
-for i in message:
-    if i.isnumeric() == True:
-        print("Lütfen bir string mesaj giriniz")
-        exit(0)
-
 #Girilen a değerinin sayı olup olmadığı kontrol ediliyor.
 if a.isnumeric() == False:
     print("a degeri bir sayı olmalıdır")
@@ -111,7 +109,13 @@ if  isPrimeBetween(int(a),len(alphabet)) == False:
     print("a ile n değeri aralarında asal olmalıdır.")
     exit(0)
 
-encryptedString = encryption(message,a,b)  #Şifrelenmiş mesaj elde ediliyor.
+messageList = message.split(' ')
+
+encryptedList = []
+
+for i in messageList:
+    encryptedList.append(encryption(i, a, b) + " ")  # Şifrelenmiş mesaj elde ediliyor.
+
 
 counter = 0 #Kaç deneme yapıldığını gösteren sayaç.
 
@@ -119,7 +123,13 @@ counter = 0 #Kaç deneme yapıldığını gösteren sayaç.
 for a in range(1,len(alphabet)):
     if isPrimeBetween(int(a), len(alphabet)) == True:
         for b in range(1,len(alphabet)):
-                decryption(encryptedString, a, b)
-                counter += 1
+            print("Anahtar degeri : (", a, ",", b, ")")
+            print("Çözülmüş metin : ",end='')
+            counter += 1
+            for h in encryptedList:
+                decryption(h, a, b)
+            print('\n')
 
-print(counter)
+#print(counter)
+
+
